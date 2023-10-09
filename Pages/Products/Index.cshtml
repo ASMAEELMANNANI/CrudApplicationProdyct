@@ -1,0 +1,73 @@
+﻿@page
+@model ProductsCRUDApplication.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "List of products";
+}
+
+<h1>Products</h1>
+
+
+<div class="container">
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <div class="row">
+        <div class="col-md-3">
+            <form>
+                Designation <br /><input type="text" asp-for="Des" /><br /><br />
+                Category <br /><select class="form-control" asp-for="Cat" asp-items="new SelectList(Model.Categories)">
+                    <option value="">All</option>
+                </select>
+                Minimum price <br /><input type="text" asp-for="Min_Price" /><br /><br />
+                Maxmum price <br /><input type="text" asp-for="Max_Price" /><br /><br />
+
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                @foreach (var item in Model.Product) {
+                    <div class="col-md-3 product-item">
+                        
+                        <img src="@item.Image" alt="Image" style="width:100px; height:100px; "/><br />
+                        <h4>@item.Name</h4>
+                        <p>Description: @item.Description</p>
+                       <!--
+                            <p>Category: @item.category</p>
+                            <p>Stock: @item.Stock</p>
+                       --> 
+                        <p>Price: @item.Price DH</p>
+                        <div class="product-actions">
+                            <a asp-page="./Edit" asp-route-id="@item.IdProd">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.IdProd">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.IdProd">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        padding: 20px;
+    }
+
+    .product-item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-actions {
+        margin-top: 10px;
+    }
+</style>

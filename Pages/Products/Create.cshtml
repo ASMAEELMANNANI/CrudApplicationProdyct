@@ -1,0 +1,95 @@
+﻿@page
+@model ProductsCRUDApplication.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form  method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                @{
+                    var categories = new List<SelectListItem>
+                {
+                new SelectListItem { Value = "Electronic", Text = "Electronic" },
+                new SelectListItem { Value = "Clothes", Text = "Clothes" },
+                new SelectListItem { Value = "Shoes", Text = "Shoes" },
+                new SelectListItem { Value = "Buildings", Text = "Buildings" },
+                new SelectListItem { Value = "Food and drinks", Text = "Food and drinks" },
+                new SelectListItem { Value = "Sports and leisures", Text = "Sports and leisures" },
+                new SelectListItem { Value = "Health and beauty", Text = "Health and beauty" },
+                new SelectListItem { Value = "Books", Text = "Books" },
+                new SelectListItem { Value = "Jewelry and watches", Text = "Jewelry and watches" }
+                };
+                }
+
+                <label asp-for="Product.category" class="control-label"></label>
+                <!--  <input asp-for="Product.category" class="form-control" /> 
+
+                -->
+                <select class="form-control" id="Category" asp-for="Product.category">
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.Value">@category.Text</option>
+                    }
+                </select>
+
+                <span asp-validation-for="Product.category" class="text-danger"></span>
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Stock" class="control-label"></label>
+                <input asp-for="Product.Stock" class="form-control" />
+                <span asp-validation-for="Product.Stock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+              
+                @{
+                    string productImageValue = "your_value_here";
+                }
+
+                <input type="hidden" name="Product.Image" value="@productImageValue">
+                <label asp-for="Product.Image" class="control-label"></label>
+                <input asp-for="ImageFile" type="file" name="ImageFile" class="form-control" />
+                <span asp-validation-for="Product.Image" class="text-danger"></span>
+               
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

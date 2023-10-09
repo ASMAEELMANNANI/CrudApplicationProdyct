@@ -1,0 +1,54 @@
+﻿@page
+@model ProductsCRUDApplication.Pages.Products.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="product-card">
+    
+    <div class="product-image">
+        <h1>Details</h1>
+        <img src="@Url.Content(Model.Product.Image)" alt="Image" style="width:100px; height:100px;" />
+    </div>
+    <div class="product-details">
+       
+  
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.category)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.category)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Stock)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Stock)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+        </dl>
+        <div>
+            <a asp-page="./Edit" asp-route-id="@Model.Product?.IdProd">Edit</a> |
+            <a asp-page="./Index">Back to List</a>
+        </div>
+    </div>
+</div>
